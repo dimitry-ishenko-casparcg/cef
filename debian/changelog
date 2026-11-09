@@ -1,3 +1,10 @@
+cef-amd64 (142.0.17+g60aac24-2) unstable; urgency=medium
+
+  * Add build-source-all script
+  * d/watch: download tarballs for all arches
+
+ -- Dimitry Ishenko <dimitry.ishenko@gmail.com>  Mon, 09 Nov 2026 18:28:55 -0500
+
 cef-amd64 (142.0.17+g60aac24-1) unstable; urgency=medium
 
   * Add Debian release workflow
