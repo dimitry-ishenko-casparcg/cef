@@ -1,5 +1,9 @@
-cef-amd64 (142.0.17+g60aac24-1) UNRELEASED; urgency=medium
+cef-amd64 (142.0.17+g60aac24-1) unstable; urgency=medium
 
-  * Initial release
+  * Add Debian release workflow
+  * Create basic README.md
+  * Add LICENSE.md
+  * Add Debian packaging
+  * Initial commit
 
- -- Dimitry Ishenko <dimitry.ishenko@gmail.com>  Mon, 09 Nov 2026 11:52:49 -0500
+ -- Dimitry Ishenko <dimitry.ishenko@gmail.com>  Mon, 09 Nov 2026 16:22:23 -0500
