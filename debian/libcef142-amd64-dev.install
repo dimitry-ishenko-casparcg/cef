@@ -1,0 +1,6 @@
+usr/lib/cef/*/*/include/
+
+usr/lib/cef/*/*/chrome-sandbox
+usr/lib/cef/*/*/libcef_dll_wrapper.a
+
+usr/lib/*/cmake/

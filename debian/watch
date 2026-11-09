@@ -1,0 +1,6 @@
+Version: 5
+
+Source: https://cef-builds.spotifycdn.com/index.json
+Page-Mangle: s%"name":\s*"(cef_binary_142\.[^"]+)"%<a href="https://cef-builds.spotifycdn.com/$1"></a>%g
+Download-Url-Mangle: s/\+/%2B/g
+Matching-Pattern: .*/cef_binary_([\d.]+\+g[0-9a-f]+)\+chromium-[\d.]+_linux64_minimal\.tar\.bz2
