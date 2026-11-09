@@ -1,2 +1,2 @@
 extend-diff-ignore = "^.github/workflows/debian-release.yaml$"
-extend-diff-ignore = "^(LICENSE.md|README.md)$"
+extend-diff-ignore = "^(LICENSE.md|README.md|build-source-all)$"

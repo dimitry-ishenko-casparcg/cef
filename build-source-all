@@ -1,0 +1,39 @@
+#!/bin/bash
+set -e
+
+ver=$(dpkg-parsechangelog -S Version)
+
+mkfetch()
+{
+    local name=cef-$1
+    local fetch=../${name}_${ver}.fetch
+
+    cat > $fetch <<EOF
+#!/bin/sh
+
+d=\$(dirname "\$0")
+v=${ver}
+o=${name}_\${v%-*}.orig.tar.bz2
+
+wget -cO \$d/\$o https://github.com/dimitry-ishenko-casparcg/cef/releases/download/debian/\$v/\$o
+EOF
+    chmod +x $fetch
+}
+
+# amd64
+dpkg-buildpackage -S -d
+mkfetch amd64
+
+for arch in arm64 armhf; do
+    rm -rf ../cef-$arch || true
+
+    mkdir ../cef-$arch
+    cp -a debian ../cef-$arch/
+    sed -i "s/amd64/$arch/" ../cef-$arch/debian/changelog
+    sed -i "s/amd64/$arch/" ../cef-$arch/debian/control
+
+    (cd ../cef-$arch && dpkg-buildpackage -S -d)
+    mkfetch $arch
+
+    rm -rf ../cef-$arch
+done
