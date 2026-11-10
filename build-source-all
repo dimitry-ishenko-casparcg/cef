@@ -29,8 +29,7 @@ for arch in arm64 armhf; do
 
     mkdir ../cef-$arch
     cp -a debian ../cef-$arch/
-    sed -i "s/amd64/$arch/" ../cef-$arch/debian/changelog
-    sed -i "s/amd64/$arch/" ../cef-$arch/debian/control
+    sed -i "s/amd64/$arch/" ../cef-$arch/debian/{changelog,control}
 
     (cd ../cef-$arch && dpkg-buildpackage -S -d)
     mkfetch $arch
