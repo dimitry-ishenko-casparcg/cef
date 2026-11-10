@@ -1,3 +1,9 @@
+cef-amd64 (142.0.17+g60aac24-5) unstable; urgency=medium
+
+  * d/control: tweak
+
+ -- Dimitry Ishenko <dimitry.ishenko@gmail.com>  Mon, 09 Nov 2026 23:13:51 -0500
+
 cef-amd64 (142.0.17+g60aac24-4) unstable; urgency=medium
 
   * d/rules: dwz often fails due to cef size
