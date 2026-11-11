@@ -51,5 +51,10 @@ override_dh_gencontrol:
 
 override_dh_dwz:
 
+override_dh_installdeb:
+	debian/gen-maintscripts.sh $(HEADER) $(LIBRARY) $(DEB_HOST_MULTIARCH) $(MAJOR)
+	dh_installdeb
+
 execute_before_dh_clean:
 	rm -f debian/CEFConfigVersion.cmake debian/CEFTargets.cmake
+	rm -f debian/$(LIBRARY).postinst debian/$(LIBRARY).prerm
