@@ -1,7 +1,7 @@
-# Debian Packaging for CEF 142
+# Debian Packaging for CEF 150
 
 This is Debian packaging for the [Chromium Embedded Framework
-v142](https://bitbucket.org/chromiumembedded/cef).
+v150](https://bitbucket.org/chromiumembedded/cef).
 
 Binary packages for Debian, Ubuntu, RaspberryPi and other Debian-based
 distributions can be installed from the [CCCP Linux Package
@@ -9,13 +9,13 @@ Archive](https://github.com/cccp-linux/archive). Follow their instructions to
 set up the archive and be sure to add the _casparcg_ component. Then, run:
 
 ```shell
-sudo apt install libcef142
+sudo apt install libcef150
 ```
 
 Or, to install the development package:
 
 ```shell
-sudo apt install libcef142-dev
+sudo apt install libcef150-dev
 ```
 
 Share and enjoy.
