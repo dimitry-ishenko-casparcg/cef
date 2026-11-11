@@ -1,8 +1,10 @@
 #!/usr/bin/make -f
+include /usr/share/dpkg/architecture.mk
 include /usr/share/dpkg/pkg-info.mk
 
 export DH_VERBOSE = 1
 export MAJOR := $(firstword $(subst ., ,$(DEB_VERSION_UPSTREAM)))
+CEF_DIR := /usr/lib/cef/$(DEB_HOST_MULTIARCH)/$(MAJOR)
 
 %:
 	dh $@
@@ -10,4 +12,13 @@ export MAJOR := $(firstword $(subst ., ,$(DEB_VERSION_UPSTREAM)))
 override_dh_auto_configure:
 	dh_auto_configure -- -DCMAKE_BUILD_TYPE=Release
 
+execute_before_dh_install:
+	sed -e "s|@MAJOR@|$(MAJOR)|g" \
+	    debian/CEFConfigVersion.cmake.in > debian/CEFConfigVersion.cmake
+	sed -e "s|@CEF_DIR@|$(CEF_DIR)|g" \
+	    debian/CEFTargets.cmake.in > debian/CEFTargets.cmake
+
 override_dh_dwz:
+
+execute_before_dh_clean:
+	rm -f debian/CEFConfigVersion.cmake debian/CEFTargets.cmake

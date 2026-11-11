@@ -1,0 +1,12 @@
+add_library(CEF::libcef SHARED IMPORTED)
+set_target_properties(CEF::libcef PROPERTIES
+    IMPORTED_LOCATION "@CEF_DIR@/libcef.so"
+)
+
+add_library(CEF::libcef_dll_wrapper STATIC IMPORTED)
+set_target_properties(CEF::libcef_dll_wrapper PROPERTIES
+    IMPORTED_LOCATION "@CEF_DIR@/libcef_dll_wrapper.a"
+  IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
+)
+target_include_directories(CEF::libcef_dll_wrapper INTERFACE "@CEF_DIR@")
+target_link_libraries(CEF::libcef_dll_wrapper INTERFACE CEF::libcef)
