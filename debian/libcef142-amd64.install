@@ -1,17 +1,20 @@
 # required components
-usr/lib/cef/*/*/libcef.so
-usr/lib/cef/*/*/icudtl.dat
-usr/lib/cef/*/*/v8_context_snapshot.bin
+Release/libcef.so                usr/lib/cef/${DEB_HOST_MULTIARCH}/${env:MAJOR}/
+Release/v8_context_snapshot.bin  usr/lib/cef/${DEB_HOST_MULTIARCH}/${env:MAJOR}/
+Resources/icudtl.dat             usr/lib/cef/${DEB_HOST_MULTIARCH}/${env:MAJOR}/
 
 # ANGLE support
-usr/lib/cef/*/*/libEGL.so
-usr/lib/cef/*/*/libGLESv2.so
+Release/libEGL.so                usr/lib/cef/${DEB_HOST_MULTIARCH}/${env:MAJOR}/
+Release/libGLESv2.so             usr/lib/cef/${DEB_HOST_MULTIARCH}/${env:MAJOR}/
 
 # SwANGLE support
-usr/lib/cef/*/*/libvk_swiftshader.so
-usr/lib/cef/*/*/libvulkan.so.1
-usr/lib/cef/*/*/vk_swiftshader_icd.json
+Release/libvk_swiftshader.so     usr/lib/cef/${DEB_HOST_MULTIARCH}/${env:MAJOR}/
+Release/libvulkan.so.1           usr/lib/cef/${DEB_HOST_MULTIARCH}/${env:MAJOR}/
+Release/vk_swiftshader_icd.json  usr/lib/cef/${DEB_HOST_MULTIARCH}/${env:MAJOR}/
 
 # resources
-usr/lib/cef/*/*/locales
-usr/lib/cef/*/*/*.pak
+Resources/locales                usr/lib/cef/${DEB_HOST_MULTIARCH}/${env:MAJOR}/
+Resources/*.pak                  usr/lib/cef/${DEB_HOST_MULTIARCH}/${env:MAJOR}/
+
+# sandbox
+Release/chrome-sandbox           usr/lib/cef/${DEB_HOST_MULTIARCH}/${env:MAJOR}/

@@ -1,15 +1,13 @@
 #!/usr/bin/make -f
+include /usr/share/dpkg/pkg-info.mk
 
-DH_VERBOSE = 1
-VER_MAJOR = $(shell dpkg-parsechangelog -S Version | cut -d. -f1)
+export DH_VERBOSE = 1
+export MAJOR := $(firstword $(subst ., ,$(DEB_VERSION_UPSTREAM)))
 
 %:
 	dh $@
 
 override_dh_auto_configure:
-	dh_auto_configure -- -DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_INSTALL_INCLUDEDIR=lib/cef/${DEB_HOST_MULTIARCH}/${VER_MAJOR} \
-		-DCMAKE_INSTALL_LIBDIR=lib/cef/${DEB_HOST_MULTIARCH}/${VER_MAJOR} \
-		-DCMAKE_INSTALL_CMAKEDIR=lib/${DEB_HOST_MULTIARCH}/cmake/CEF${VER_MAJOR}
+	dh_auto_configure -- -DCMAKE_BUILD_TYPE=Release
 
 override_dh_dwz:

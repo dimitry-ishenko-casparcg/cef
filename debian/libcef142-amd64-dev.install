@@ -1,6 +1,2 @@
-usr/lib/cef/*/*/include/
-
-usr/lib/cef/*/*/chrome-sandbox
-usr/lib/cef/*/*/libcef_dll_wrapper.a
-
-usr/lib/*/cmake/
+include  usr/lib/cef/${DEB_HOST_MULTIARCH}/${env:MAJOR}/
+obj-*/libcef_dll_wrapper/libcef_dll_wrapper.a  usr/lib/cef/${DEB_HOST_MULTIARCH}/${env:MAJOR}/
