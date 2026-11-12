@@ -10,6 +10,7 @@ foreach(api IN ITEMS @APIS@)
     "${_cefapi_libdir}/api${api}/libcef_dll_wrapper.a"
     "${_cefapi_root}/api${api}/libcef.so"
   )
+  target_link_options(CEF::API${api} INTERFACE "LINKER:-rpath,${_cefapi_root}/api${api}")
 endforeach()
 
 unset(_cefapi_libdir)
