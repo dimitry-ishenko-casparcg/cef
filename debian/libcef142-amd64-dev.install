@@ -4,3 +4,5 @@ obj-*/libcef_dll_wrapper/libcef_dll_wrapper.a  usr/lib/cef/${DEB_HOST_MULTIARCH}
 debian/CEFConfig.cmake         usr/lib/${DEB_HOST_MULTIARCH}/cmake/CEF${env:MAJOR}/
 debian/CEFConfigVersion.cmake  usr/lib/${DEB_HOST_MULTIARCH}/cmake/CEF${env:MAJOR}/
 debian/CEFTargets.cmake        usr/lib/${DEB_HOST_MULTIARCH}/cmake/CEF${env:MAJOR}/
+
+usr/lib/cef/*/*/api*/libcef_dll_wrapper.a
