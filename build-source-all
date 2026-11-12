@@ -21,7 +21,7 @@ EOF
 }
 
 # amd64
-dpkg-buildpackage -S -d
+dpkg-buildpackage -S -d -nc
 mkfetch amd64
 
 for arch in arm64 armhf; do
@@ -32,7 +32,7 @@ for arch in arm64 armhf; do
     sed -i "s/amd64/$arch/" ../cef-$arch/debian/{changelog,control}
     rename "s/amd64/$arch/" ../cef-$arch/debian/*.install
 
-    (cd ../cef-$arch && dpkg-buildpackage -S -d)
+    (cd ../cef-$arch && dpkg-buildpackage -S -d -nc)
     mkfetch $arch
 
     rm -rf ../cef-$arch
