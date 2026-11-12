@@ -15,6 +15,7 @@ Standards-Version: 4.6.2
 Homepage: https://bitbucket.org/chromiumembedded/cef
 
 Package: libcef142-amd64
+Section: libs
 Architecture: amd64
 Depends:
  ${shlibs:Depends},
@@ -39,6 +40,7 @@ Description: The Chromium Embedded Framework
  This package contains the CEF library and resources.
 
 Package: libcef142-amd64-dev
+Section: libdevel
 Architecture: amd64
 Depends:
  ${shlibs:Depends},
