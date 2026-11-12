@@ -5,48 +5,49 @@ include /usr/share/dpkg/pkg-info.mk
 export DH_VERBOSE = 1
 export MAJOR := $(firstword $(subst ., ,$(DEB_VERSION_UPSTREAM)))
 
-LIBRARY := libcef$(MAJOR)-$(DEB_HOST_ARCH)
-LIBDIR  := /usr/lib/cef/$(DEB_HOST_MULTIARCH)/$(MAJOR)
-BUILDDIR:= obj-$(DEB_HOST_GNU_TYPE)
+HEADER  := include/cef_api_versions.h
+WRAPPER := libcef_dll_wrapper
 
-HEADER = include/cef_api_versions.h
-WRAPPER = libcef_dll_wrapper/libcef_dll_wrapper.a
+BUILDDIR:= obj-$(DEB_HOST_GNU_TYPE)
+CMAKEDIR:= /usr/lib/$(DEB_HOST_MULTIARCH)/cmake
+LIBDIR  := /usr/lib/cef/$(DEB_HOST_MULTIARCH)/$(MAJOR)
+LIBRARY := libcef$(MAJOR)-$(DEB_HOST_ARCH)
 
 APIS := $(shell debian/get-apis.sh $(HEADER))
 ifeq ($(strip $(APIS)),)
 $(error no stable APIs found in $(HEADER))
 endif
-APIS_CONFIG := $(patsubst %,$(BUILDDIR)/api%/Makefile,$(APIS))
-APIS_BUILD  := $(patsubst %,$(BUILDDIR)/api%/$(WRAPPER),$(APIS))
-APIS_INSTALL:= $(patsubst %,debian/tmp/$(LIBDIR)/api%/libcef_dll_wrapper.a,$(APIS))
+
+CEF_CMAKE := CEFConfig.cmake CEFConfigVersion.cmake CEFTargets.cmake
 
 ####################
 %:
 	dh $@
 
-# APIS_CONFIG: configure wrapper for each API
-$(BUILDDIR)/api%/Makefile:
-	dh_auto_configure --builddir=$(@D) -- -DCMAKE_BUILD_TYPE=Release -Dapi_version=$*
-
-override_dh_auto_configure: $(APIS_CONFIG)
+override_dh_auto_configure:
+	set -e; for api in $(APIS); do dh_auto_configure \
+		--builddir=$(BUILDDIR)/api$$api -- -DCMAKE_BUILD_TYPE=Release -Dapi_version=$$api; \
+	done
 	dh_auto_configure -- -DCMAKE_BUILD_TYPE=Release
+	
+	set -e; for f in $(CEF_CMAKE); do sed \
+		-e "s|@MAJOR@|$(MAJOR)|g" -e "s|@LIBDIR@|$(LIBDIR)|g" -e "s|@APIS@|$(APIS)|g" \
+		"debian/$$f.in" > "$(BUILDDIR)/$$f"; \
+	done
 
-# APIS_BUILD: build wrapper for each API
-$(BUILDDIR)/api%/$(WRAPPER):
-	dh_auto_build --builddir=$(BUILDDIR)/api$* -- libcef_dll_wrapper
+override_dh_auto_build:
+	set -e; for api in $(APIS); do dh_auto_build \
+		--builddir=$(BUILDDIR)/api$$api -- $(WRAPPER); \
+	done
+	dh_auto_build -- $(WRAPPER)
 
-override_dh_auto_build: $(APIS_BUILD)
-	dh_auto_build
-
-# APIS_INSTALL: install wrapper for each API
-debian/tmp/$(LIBDIR)/api%/libcef_dll_wrapper.a:
-	install -Dm644 $(BUILDDIR)/api$*/$(WRAPPER) $@
-
-override_dh_auto_install: $(APIS_INSTALL)
-	sed -e "s|@MAJOR@|$(MAJOR)|g" \
-	    debian/CEFConfigVersion.cmake.in > debian/CEFConfigVersion.cmake
-	sed -e "s|@LIBDIR@|$(LIBDIR)|g" \
-	    debian/CEFTargets.cmake.in > debian/CEFTargets.cmake
+override_dh_auto_install:
+	set -e; for api in $(APIS); do install \
+		-Dm644 $(BUILDDIR)/api$$api/$(WRAPPER)/$(WRAPPER).a \
+		debian/tmp$(LIBDIR)/api$$api/$(WRAPPER).a; \
+	done
+	
+	install -Dm644 -t debian/tmp$(CMAKEDIR)/CEF$(MAJOR) $(addprefix $(BUILDDIR)/,$(CEF_CMAKE))
 
 override_dh_gencontrol:
 	debian/gen-substvars.sh $(HEADER) $(LIBRARY)
@@ -59,5 +60,4 @@ override_dh_installdeb:
 	dh_installdeb
 
 execute_before_dh_clean:
-	rm -f debian/CEFConfigVersion.cmake debian/CEFTargets.cmake
 	rm -f debian/$(LIBRARY).postinst debian/$(LIBRARY).prerm
