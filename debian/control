@@ -43,7 +43,6 @@ Package: libcef142-amd64-dev
 Section: libdevel
 Architecture: amd64
 Depends:
- ${shlibs:Depends},
  ${misc:Depends},
  libcef142-amd64 (= ${binary:Version})
 Provides:
