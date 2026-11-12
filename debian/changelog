@@ -1,3 +1,9 @@
+cef-amd64 (150.0.23+g4ccc4ca-3) unstable; urgency=medium
+
+  * CEF[API]Targets: set RPATH
+
+ -- Dimitry Ishenko <dimitry.ishenko@gmail.com>  Thu, 12 Nov 2026 16:56:21 -0500
+
 cef-amd64 (150.0.23+g4ccc4ca-2) unstable; urgency=medium
 
   * Move resources into libcef150-data-amd64
