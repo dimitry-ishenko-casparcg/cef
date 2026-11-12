@@ -2,6 +2,7 @@ add_library(CEF::libcef SHARED IMPORTED)
 set_target_properties(CEF::libcef PROPERTIES
   IMPORTED_LOCATION "@LIBDIR@/libcef.so"
 )
+target_link_options(CEF::libcef INTERFACE "LINKER:-rpath,@LIBDIR@")
 
 add_library(CEF::libcef_dll_wrapper STATIC IMPORTED)
 set_target_properties(CEF::libcef_dll_wrapper PROPERTIES
