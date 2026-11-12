@@ -19,6 +19,7 @@ $(error no stable APIs found in $(HEADER))
 endif
 
 CEF_CMAKE := CEFConfig.cmake CEFConfigVersion.cmake CEFTargets.cmake
+CEFAPI_CMAKE := CEFAPIConfig.cmake CEFAPIConfigVersion.cmake CEFAPITargets.cmake
 
 ####################
 %:
@@ -30,7 +31,7 @@ override_dh_auto_configure:
 	done
 	dh_auto_configure -- -DCMAKE_BUILD_TYPE=Release
 	
-	set -e; for f in $(CEF_CMAKE); do sed \
+	set -e; for f in $(CEF_CMAKE) $(CEFAPI_CMAKE); do sed \
 		-e "s|@MAJOR@|$(MAJOR)|g" -e "s|@LIBDIR@|$(LIBDIR)|g" -e "s|@APIS@|$(APIS)|g" \
 		"debian/$$f.in" > "$(BUILDDIR)/$$f"; \
 	done
@@ -48,6 +49,7 @@ override_dh_auto_install:
 	done
 	
 	install -Dm644 -t debian/tmp$(CMAKEDIR)/CEF$(MAJOR) $(addprefix $(BUILDDIR)/,$(CEF_CMAKE))
+	install -Dm644 -t debian/tmp$(CMAKEDIR)/CEFAPI$(MAJOR) $(addprefix $(BUILDDIR)/,$(CEFAPI_CMAKE))
 
 override_dh_gencontrol:
 	debian/gen-substvars.sh $(HEADER) $(LIBRARY)

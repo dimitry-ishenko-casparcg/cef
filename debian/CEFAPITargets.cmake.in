@@ -1,0 +1,16 @@
+set(_cefapi_libdir "@LIBDIR@")
+cmake_path(GET _cefapi_libdir PARENT_PATH _cefapi_root)
+
+foreach(api IN ITEMS @APIS@)
+  add_library(CEF::API${api} INTERFACE IMPORTED)
+  target_compile_definitions(CEF::API${api} INTERFACE CEF_API_VERSION=${api})
+  target_include_directories(CEF::API${api} INTERFACE "${_cefapi_libdir}")
+
+  target_link_libraries(CEF::API${api} INTERFACE
+    "${_cefapi_libdir}/api${api}/libcef_dll_wrapper.a"
+    "${_cefapi_root}/api${api}/libcef.so"
+  )
+endforeach()
+
+unset(_cefapi_libdir)
+unset(_cefapi_root)

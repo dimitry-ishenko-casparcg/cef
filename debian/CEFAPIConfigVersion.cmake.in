@@ -1,0 +1,15 @@
+set(PACKAGE_VERSION "@MAJOR@")
+set(PACKAGE_VERSION_COMPATIBLE FALSE)
+
+set(_cefapi_apis @APIS@)
+if(NOT PACKAGE_FIND_VERSION_RANGE)
+  list(FIND _cefapi_apis "${PACKAGE_FIND_VERSION}" _cefapi_index)
+
+  if(NOT _cefapi_index EQUAL -1)
+    set(PACKAGE_VERSION_COMPATIBLE TRUE)
+    set(PACKAGE_VERSION_EXACT TRUE)
+  endif()
+endif()
+
+unset(_cefapi_apis)
+unset(_cefapi_index)

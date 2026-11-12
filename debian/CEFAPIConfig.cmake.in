@@ -1,0 +1,8 @@
+if(NOT TARGET CEF::API)
+  if(NOT CEFAPI_FIND_VERSION)
+    message(FATAL_ERROR "find_package(CEFAPI) requires an API version")
+  endif()
+
+  include("${CMAKE_CURRENT_LIST_DIR}/CEFAPITargets.cmake")
+  add_library(CEF::API ALIAS "CEF::API${CEFAPI_FIND_VERSION}")
+endif()
