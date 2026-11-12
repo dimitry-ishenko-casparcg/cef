@@ -1,8 +1,8 @@
-cef-amd64 (150.0.23+g4ccc4ca-1) UNRELEASED; urgency=medium
+cef-amd64 (150.0.23+g4ccc4ca-1) unstable; urgency=medium
 
-  * 
+  * New upstream version 150.0.23+g4ccc4ca
 
- -- Dimitry Ishenko <dimitry.ishenko@gmail.com>  Thu, 12 Nov 2026 11:19:56 -0500
+ -- Dimitry Ishenko <dimitry.ishenko@gmail.com>  Thu, 12 Nov 2026 11:20:33 -0500
 
 cef-amd64 (142.0.17+g60aac24-7) unstable; urgency=medium
 
