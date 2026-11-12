@@ -1,0 +1,1 @@
+Resources/*  usr/lib/cef/${DEB_HOST_MULTIARCH}/${env:MAJOR}/
