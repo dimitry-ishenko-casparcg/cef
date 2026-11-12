@@ -1,3 +1,9 @@
+cef-amd64 (142.0.17+g60aac24-8) unstable; urgency=medium
+
+  * CEF[API]Targets: set RPATH
+
+ -- Dimitry Ishenko <dimitry.ishenko@gmail.com>  Thu, 12 Nov 2026 16:53:17 -0500
+
 cef-amd64 (142.0.17+g60aac24-7) unstable; urgency=medium
 
   * build-source-all: fix
