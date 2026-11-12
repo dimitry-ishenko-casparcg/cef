@@ -13,6 +13,9 @@ HEADER = include/cef_api_versions.h
 WRAPPER = libcef_dll_wrapper/libcef_dll_wrapper.a
 
 APIS := $(shell debian/get-apis.sh $(HEADER))
+ifeq ($(strip $(APIS)),)
+$(error no stable APIs found in $(HEADER))
+endif
 APIS_CONFIG := $(patsubst %,$(BUILDDIR)/api%/Makefile,$(APIS))
 APIS_BUILD  := $(patsubst %,$(BUILDDIR)/api%/$(WRAPPER),$(APIS))
 APIS_INSTALL:= $(patsubst %,debian/tmp/$(LIBDIR)/api%/libcef_dll_wrapper.a,$(APIS))
