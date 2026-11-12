@@ -1,3 +1,18 @@
+cef-amd64 (142.0.17+g60aac24-7) unstable; urgency=medium
+
+  * build-source-all: fix
+  * d/install: simplify
+  * Add CEFAPI targets for CMake
+  * d/rules: switch to for-loops for simplicity
+  * d/rules: error on no APIs
+  * d/control: tweak
+  * d/gen-substvars: fix
+  * d/control: add sections
+  * Install API links
+  * Build and install wrapper for each API
+
+ -- Dimitry Ishenko <dimitry.ishenko@gmail.com>  Thu, 12 Nov 2026 11:12:31 -0500
+
 cef-amd64 (142.0.17+g60aac24-6) unstable; urgency=medium
 
   * Install hand-rolled simplified CMake files
