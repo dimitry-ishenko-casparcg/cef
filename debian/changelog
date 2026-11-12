@@ -1,3 +1,9 @@
+cef-amd64 (150.0.23+g4ccc4ca-2) unstable; urgency=medium
+
+  * Move resources into libcef150-data-amd64
+
+ -- Dimitry Ishenko <dimitry.ishenko@gmail.com>  Thu, 12 Nov 2026 12:52:14 -0500
+
 cef-amd64 (150.0.23+g4ccc4ca-1) unstable; urgency=medium
 
   * New upstream version 150.0.23+g4ccc4ca
