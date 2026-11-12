@@ -12,5 +12,5 @@ for api in $(debian/get-apis.sh "$header"); do
     dev_provides="${dev_provides:+$dev_provides, }libcef-api$api-dev"
 done
 
-echo "cef:Provides=$provides" > "debian/$library.substvars"
-echo "cef:DevProvides=$dev_provides" > "debian/$library-dev.substvars"
+echo "cef:Provides=$provides" >> "debian/$library.substvars"
+echo "cef:DevProvides=$dev_provides" >> "debian/$library-dev.substvars"
