@@ -1,5 +1,6 @@
 include  usr/lib/cef/${DEB_HOST_MULTIARCH}/${env:MAJOR}/
+
+usr/lib/cef/*/*/api*/libcef_dll_wrapper.a
 obj-*/libcef_dll_wrapper/libcef_dll_wrapper.a  usr/lib/cef/${DEB_HOST_MULTIARCH}/${env:MAJOR}/
 
 usr/lib/*/cmake
-usr/lib/cef/*/*/api*/libcef_dll_wrapper.a
